@@ -18,7 +18,6 @@ const CLASS_NAME_DROPDOWN_ROTATE = 'rotate';
 const SELECTOR_SIDEBAR = '[data-bs-sidebar]';
 const SELECTOR_TOGGLE = '.sidebar-toggle';
 const SELECTOR_DROPDOWN = '.sidebar-dropdown';
-const SELECTOR_SUB_MENU = '.sidebar-sub-nav';
 
 const STORAGE_KEY = 's-sidebar-state';
 
@@ -52,7 +51,7 @@ class Sidebar extends BaseComponent {
     }
 
     dropdownToggle(dropdownElement) {
-        const subMenuElement = SelectorEngine.next(dropdownElement, SELECTOR_SUB_MENU)[0];
+        const subMenuElement = SelectorEngine.next(dropdownElement, 'ul')[0];
 
         dropdownElement.classList.toggle(CLASS_NAME_DROPDOWN_ROTATE);
         subMenuElement.classList.toggle(CLASS_NAME_SUB_MENU_SHOW);
