@@ -12,7 +12,7 @@ const EVENT_LOAD_DATA_API = `load${EVENT_KEY}${DATA_API_KEY}`;
 const EVENT_CLICK_DATA_API = `click${EVENT_KEY}${DATA_API_KEY}`;
 
 const CLASS_NAME_CLOSE = 'close';
-const CLASS_NAME_SUB_MENU_SHOW = 'show';
+const CLASS_NAME_SUB_MENU_OPEN = 'open';
 const CLASS_NAME_DROPDOWN_ROTATE = 'rotate';
 
 const SELECTOR_SIDEBAR = '[data-bs-sidebar]';
@@ -52,9 +52,10 @@ class Sidebar extends BaseComponent {
 
     dropdownToggle(dropdownElement) {
         const subMenuElement = SelectorEngine.next(dropdownElement, 'ul')[0];
+        const liElement = SelectorEngine.parents(dropdownElement, 'li')[0];
 
         dropdownElement.classList.toggle(CLASS_NAME_DROPDOWN_ROTATE);
-        subMenuElement.classList.toggle(CLASS_NAME_SUB_MENU_SHOW);
+        liElement.classList.toggle(CLASS_NAME_SUB_MENU_OPEN);
     }
 
     static create(element, config = {}) {
