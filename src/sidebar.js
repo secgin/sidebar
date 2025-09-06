@@ -53,9 +53,36 @@ class Sidebar extends BaseComponent {
     dropdownToggle(dropdownElement) {
         const subMenuElement = SelectorEngine.next(dropdownElement, 'ul')[0];
         const liElement = SelectorEngine.parents(dropdownElement, 'li')[0];
+        const isClosed = this._element.classList.contains(CLASS_NAME_CLOSE);
 
+        if (isClosed) {
+            // Sadece close modunda accordion çalışsın
+            const parentUl = liElement.parentElement;
+            if (parentUl) {
+                // Aynı seviyedeki açık menüleri kapat
+                const openItems = SelectorEngine.find(`.${CLASS_NAME_SUB_MENU_OPEN}`, parentUl);
+                for (const item of openItems) {
+                    if (item !== liElement) {
+                        item.classList.remove(CLASS_NAME_SUB_MENU_OPEN);
+                        const btn = SelectorEngine.findOne(`.${CLASS_NAME_DROPDOWN_ROTATE}`, item);
+                        if (btn) btn.classList.remove(CLASS_NAME_DROPDOWN_ROTATE);
+                    }
+                }
+            }
+        }
+
+        // Seçilen menüyü aç/kapat
         dropdownElement.classList.toggle(CLASS_NAME_DROPDOWN_ROTATE);
         liElement.classList.toggle(CLASS_NAME_SUB_MENU_OPEN);
+    }
+
+    closeAllDropdowns() {
+        const openItems = SelectorEngine.find(`.${CLASS_NAME_SUB_MENU_OPEN}`, this._element);
+        for (const item of openItems) {
+            item.classList.remove(CLASS_NAME_SUB_MENU_OPEN);
+            const btn = SelectorEngine.findOne(`.${CLASS_NAME_DROPDOWN_ROTATE}`, item);
+            if (btn) btn.classList.remove(CLASS_NAME_DROPDOWN_ROTATE);
+        }
     }
 
     static create(element, config = {}) {
@@ -73,6 +100,21 @@ EventHandler.on(window, EVENT_LOAD_DATA_API, () => {
 EventHandler.on(document, EVENT_CLICK_DATA_API, SELECTOR_TOGGLE, function (event) {
     event.preventDefault();
     Sidebar.create(this).sidebarToggle();
+});
+
+EventHandler.on(document, EVENT_CLICK_DATA_API, (event) => {
+    const sidebar = SelectorEngine.findOne(SELECTOR_SIDEBAR);
+    if (!sidebar) return;
+
+    const sidebarInstance = Sidebar.getInstance(sidebar);
+    if (!sidebarInstance) return;
+
+    const isClosed = sidebar.classList.contains(CLASS_NAME_CLOSE);
+    if (!isClosed) return; // sadece close modunda çalışsın
+
+    if (!sidebar.contains(event.target)) {
+        sidebarInstance.closeAllDropdowns();
+    }
 });
 
 EventHandler.on(document, EVENT_CLICK_DATA_API, SELECTOR_DROPDOWN, function (event) {

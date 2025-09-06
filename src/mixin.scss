@@ -1,4 +1,4 @@
-$color-mode-type: "media-query" !default;
+$color-mode-type: "media-querya" !default;
 
 @mixin color-mode($mode: light, $root: false) {
   @if $color-mode-type == "media-query" {
