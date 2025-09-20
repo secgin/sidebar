@@ -21,6 +21,9 @@
             display: grid;
             grid-template-columns: auto 1fr;
         }
+        .sidebar {
+            max-height: 100vh;
+        }
     </style>
 
 </head>
@@ -34,24 +37,81 @@
     </div>
 
     <div class="sidebar-main">
+        <a href="#" class="sidebar-link">
+            <span class="sidebar-icon"><i class="bi bi-house-door"></i></span>
+            <strong>Home</strong>
+        </a>
+        <div class="sidebar-dropdown">
+            <button class="sidebar-dropdown-toggle">
+                <span class="sidebar-icon"><i class="bi bi-boxes"></i></span>
+                <strong>Products</strong>
+            </button>
+            <nav>
+                <a href="#" class="sidebar-link">Products</a>
+            </nav>
+            <ul>
+                <li></li>
+                <li><a href="#">Purchase Orders</a></li>
+                <li class="sidebar-dropdown">
+                    <button class="sidebar-dropdown-toggle">
+                        <strong>Transfers</strong>
+                    </button>
+                    <ul>
+                        <li><a href="#">Products 1</a></li>
+                        <li><a href="#">Purchase Orders 2</a></li>
+                        <li><a href="#">Transfers 3</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Stock Count</a></li>
+                <li class="sidebar-dropdown">
+                    <button class="sidebar-dropdown-toggle">
+                        <strong>Definitions</strong>
+                    </button>
+                    <ul>
+                        <li><a href="#">Products 1</a></li>
+                        <li><a href="#">Purchase Orders 2</a></li>
+                        <li><a href="#">Transfers 3</a></li>
+                        <li><a href="#">Stock Count 4</a></li>
+                        <li><a href="#">Definitions 5</a></li>
+                        <li><a href="#">Price List 6</a></li>
+                        <li><a href="#">Product Barcode Label 7</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Price List</a></li>
+                <li><a href="#">Product Barcode Label</a></li>
+            </ul>
+        </div>
+
+        <nav class="sidebar-nav">
+
+
+        </nav>
         <ul class="sidebar-nav">
-            <li class="active">
-                <a href="#">
-                    <i class="bi bi-house-door"></i>
-                    <span>Home</span>
-                </a>
+            <li class="sidebar-nav-item">
+
             </li>
-            <li>
-                <button class="sidebar-dropdown">
-                    <i class="bi bi-boxes"></i>
-                    <span>Products</span>
+            <li class="sidebar-dropdown">
+                <button class="sidebar-dropdown-toggle">
+                    <span class="sidebar-icon"><i class="bi bi-boxes"></i></span>
+                    <strong>Products</strong>
                 </button>
                 <ul>
                     <li><a href="#">Products</a></li>
                     <li><a href="#">Purchase Orders</a></li>
-                    <li>
-                        <button class="sidebar-dropdown">
-                            <span>Transfers</span>
+                    <li class="sidebar-dropdown">
+                        <button class="sidebar-dropdown-toggle">
+                            <strong>Transfers</strong>
+                        </button>
+                        <ul>
+                            <li><a href="#">Products 1</a></li>
+                            <li><a href="#">Purchase Orders 2</a></li>
+                            <li><a href="#">Transfers 3</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Stock Count</a></li>
+                    <li class="sidebar-dropdown">
+                        <button class="sidebar-dropdown-toggle">
+                            <strong>Definitions</strong>
                         </button>
                         <ul>
                             <li><a href="#">Products 1</a></li>
@@ -63,16 +123,14 @@
                             <li><a href="#">Product Barcode Label 7</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">Stock Count</a></li>
-                    <li><a href="#">Definitions</a></li>
                     <li><a href="#">Price List</a></li>
                     <li><a href="#">Product Barcode Label</a></li>
                 </ul>
             </li>
-            <li>
-                <button class="sidebar-dropdown">
-                    <i class="bi bi-basket"></i>
-                    <span>Orders</span>
+            <li class="sidebar-dropdown">
+                <button class="sidebar-dropdown-toggle">
+                    <span class="sidebar-icon"><i class="bi bi-basket"></i></span>
+                    <strong>Orders</strong>
                 </button>
                 <ul>
                     <li><a href="#">Orders</a></li>
@@ -82,10 +140,10 @@
                     <li><a href="#">Gift Cards</a></li>
                 </ul>
             </li>
-            <li>
-                <button class="sidebar-dropdown">
-                    <i class="bi bi-people"></i>
-                    <span>Customers</span>
+            <li class="sidebar-dropdown">
+                <button class="sidebar-dropdown-toggle">
+                    <span class="sidebar-icon"><i class="bi bi-people"></i></span>
+                    <strong>Customers</strong>
                 </button>
                 <ul>
                     <li><a href="#">Customers</a></li>
@@ -93,10 +151,10 @@
                     <li><a href="#">Tags</a></li>
                 </ul>
             </li>
-            <li>
-                <button class="sidebar-dropdown">
-                    <i class="bi bi-arrow-down-square"></i>
-                    <span>Discounts</span>
+            <li class="sidebar-dropdown">
+                <button class="sidebar-dropdown-toggle">
+                    <span class="sidebar-icon"><i class="bi bi-arrow-down-square"></i></span>
+                    <strong>Discounts</strong>
                 </button>
                 <ul>
                     <li><a href="#">Campaigns</a></li>
@@ -104,10 +162,10 @@
                     <li><a href="#">Campaign Offers</a></li>
                 </ul>
             </li>
-            <li>
-                <button class="sidebar-dropdown">
-                    <i class="bi bi-shop"></i>
-                    <span>Marketing</span>
+            <li class="sidebar-dropdown">
+                <button class="sidebar-dropdown-toggle">
+                    <span class="sidebar-icon"><i class="bi bi-shop"></i></span>
+                    <strong>Marketing</strong>
                 </button>
                 <ul>
                     <li><a href="#">Summary</a></li>
@@ -119,10 +177,10 @@
                     <li><a href="#">Settings</a></li>
                 </ul>
             </li>
-            <li>
-                <button class="sidebar-dropdown">
-                    <i class="bi bi-graph-down"></i>
-                    <span>Reports</span>
+            <li class="sidebar-dropdown">
+                <button class="sidebar-dropdown-toggle">
+                    <span class="sidebar-icon"><i class="bi bi-graph-down"></i></span>
+                    <strong>Reports</strong>
                 </button>
                 <ul>
                     <li><a href="#">Sales Reports</a></li>
@@ -131,10 +189,10 @@
                     <li><a href="#">Purchase Order Reports</a></li>
                 </ul>
             </li>
-            <li>
-                <button class="sidebar-dropdown">
-                    <i class="bi bi-app-indicator"></i>
-                    <span>Apps</span>
+            <li class="sidebar-dropdown">
+                <button class="sidebar-dropdown-toggle">
+                    <span class="sidebar-icon"><i class="bi bi-app-indicator"></i></span>
+                    <strong>Apps</strong>
                 </button>
                 <ul>
                     <li><a href="#">App Store</a></li>
@@ -143,14 +201,32 @@
             </li>
             <li>
                 <a href="#">
-                    <i class="bi bi-gear"></i>
-                    <span>Settings</span>
+                    <span class="sidebar-icon"><i class="bi bi-gear"></i></span>
+                    <strong>Settings</strong>
                 </a>
             </li>
         </ul>
     </div>
 
     <div class="sidebar-footer">
+        <div class="sidebar-dropdown">
+            <button class="sidebar-dropdown-toggle">
+                <span class="sidebar-icon"><i class="bi bi-person"></i></span>
+                <strong>Seçgin Şanlı</strong>
+            </button>
+            <ul>
+                <li><a href="#">App Store</a></li>
+                <li><a href="#">My Store</a></li>
+            </ul>
+        </div>
+
+        <div class="sidebar-user">
+            <span class="sidebar-icon"><i class="bi bi-person"></i></span>
+            <div class="sidebar-user-info">
+                <strong>Seçgin Şanlı</strong>
+                <small>Yönetici</small>
+            </div>
+        </div>
     </div>
 </div>
 

@@ -6,15 +6,15 @@ import postcss from 'rollup-plugin-postcss';
 export default {
   input: 'src/index.js',
   output: {
-    file: 'dist/sidebar.min.js',
+    file: 'dist/s-boostrap.min.js',
     format: 'umd',
-    name: 'Sidebar'
+    name: 'S-Boostrap'
   },
   plugins: [
     resolve(),
     commonjs(),
     postcss({
-      extract: 'sidebar.min.css',
+      extract: 's-boostrap.min.css',
       minimize: true
     }),
     terser()

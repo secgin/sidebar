@@ -1,2 +1,5 @@
-import './sidebar.scss'
-export { default as Sidebar } from './sidebar.js'
+import './styles.scss'
+import 'bootstrap/js/src/dropdown'
+import 'bootstrap/js/src/offcanvas'
+
+import './menu';
