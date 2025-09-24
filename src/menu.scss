@@ -3,6 +3,10 @@
   list-style: none;
   margin: 0;
   padding: 0;
+
+  * {
+    box-sizing: border-box;
+  }
 }
 
 .s-menu {
@@ -14,26 +18,24 @@
 
   --s-menu-border-color: #e5e7eb;
   --s-menu-border-width: 1px;
-  --s-menu-border-radius: .375rem;
+  --s-menu-border-radius: 0;//.375rem;
 
-  --s-menu-padding: 5px;
+  --s-menu-padding: 0;
   --s-menu-item-space: 5px;
   --s-menu-icon-space: 5px;
   --s-menu-icon-size: 24px;
   --s-menu-dropdown-arrow: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 -960 960 960' width='24'><path d='M480-361q-8 0-15-2.5t-13-8.5L268-556q-11-11-11-28t11-28q11-11 28-11t28 11l156 156 156-156q11-11 28-11t28 11q11 11 11 28t-11 28L508-372q-6 6-13 8.5t-15 2.5Z'/></svg>");
 
-  display: inline-block;
+  display: inline-flex;
+  flex-direction: column;
   padding: var(--s-menu-padding) !important;
   border-width: var(--s-menu-border-width) !important;
   border-radius: var(--s-menu-border-radius) !important;
+  overflow-y: auto;
 
   &.s-menu-horizontal {
-    display: flex;
     flex-direction: row;
-  }
-
-  &:not(.s-menu-close) {
-    overflow-y: auto;
+    overflow-y: inherit;
   }
 
   &::-webkit-scrollbar-thumb {
@@ -45,14 +47,6 @@
 
   &::-webkit-scrollbar {
     width: 16px;
-  }
-
-  li {
-    &:not(.s-submenu-open) {
-      > .s-submenu {
-        display: none;
-      }
-    }
   }
 
   > li > .s-menu-link {
@@ -67,6 +61,7 @@
     overflow: hidden;
     text-decoration: none;
     white-space: nowrap;
+    cursor: pointer;
 
     border-radius: var(--s-menu-border-radius);
     color: var(--s-menu-text-color);
@@ -78,7 +73,7 @@
       color: var(--s-menu-hover-text-color);
     }
 
-    &.s-submenu-toggle {
+    &[data-bs-toggle="s-popup"] {
       position: relative;
       padding-right: 40px !important;
 
@@ -131,6 +126,11 @@
   }
 
   .s-submenu {
+    z-index: 1;
+    &:not(.s-show) {
+      display: none;
+    }
+
     background-color: var(--s-menu-bg);
 
     .s-menu-link {
@@ -143,62 +143,48 @@
   }
 
   &.s-menu-close {
+    overflow-y: inherit;
     max-width: calc(
-            var(--s-menu-padding) +
-            var(--s-menu-padding) +
             var(--s-menu-icon-size) +
             var(--s-menu-icon-space) +
             var(--s-menu-icon-space) +
             var(--s-menu-item-space) +
-            var(--s-menu-item-space) +
-            var(--s-menu-border-width) +
-            var(--s-menu-border-width)) !important;
+            var(--s-menu-item-space)) !important;
 
-    li.s-submenu-open {
-      > .s-submenu {
-        left: 100%;
-        top: 0;
+    > li {
+      > .s-menu-link[data-bs-toggle="s-popup"]::after {
+        display: none;
+      }
+
+      [data-bs-toggle="s-popup"]::after {
+        transform: rotate(-90deg);
       }
     }
   }
 
   &.s-menu-horizontal {
-    li.s-submenu-open {
-      > .s-submenu {
-        left: 0;
-        top: 100%;
+    li {
+      .s-submenu {
+        > li {
+          [data-bs-toggle="s-popup"]::after {
+            transform: rotate(-90deg);
+          }
+        }
       }
     }
   }
 
   &.s-menu-close,
   &.s-menu-horizontal {
-    > li {
-      > .s-menu-link.s-submenu-toggle::after {
-        display: none;
-      }
+    .s-submenu.s-show {
+      padding: 5px;
+      border: 1px solid var(--s-menu-border-color);
+      box-shadow: rgba(99, 99, 99, 0.2) 0 2px 8px 0;
+      border-radius: var(--s-menu-border-radius);
 
-      .s-submenu-toggle::after {
-        transform: rotate(-90deg);
-      }
-    }
-
-    li.s-submenu-open {
-      position: relative;
-
-      > .s-submenu {
-        position: absolute;
-        z-index: 1;
-
-        padding: 5px;
-        border: 1px solid var(--s-menu-border-color);
-        box-shadow: rgba(99, 99, 99, 0.2) 0 2px 8px 0;
-        border-radius: var(--s-menu-border-radius);
-
-        .s-menu-link {
-          padding-left: calc(var(--s-menu-item-space)) !important;
-          padding-right: calc(var(--s-menu-item-space)) !important;
-        }
+      .s-menu-link {
+        padding-left: calc(var(--s-menu-item-space)) !important;
+        padding-right: calc(var(--s-menu-item-space)) !important;
       }
     }
   }

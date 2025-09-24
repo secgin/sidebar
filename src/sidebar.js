@@ -100,7 +100,7 @@ EventHandler.on(window, EVENT_LOAD_DATA_API, () => {
 
 EventHandler.on(document, EVENT_CLICK_DATA_API, SELECTOR_TOGGLE, function (event) {
     event.preventDefault();
-    Sidebar.create(this).sidebarToggle();
+    Sidebar.create(this).appMenuToggle();
 });
 
 EventHandler.on(document, EVENT_CLICK_DATA_API, (event) => {

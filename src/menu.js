@@ -11,11 +11,15 @@ const EVENT_LOAD_DATA_API = `load${EVENT_KEY}${DATA_API_KEY}`;
 const EVENT_CLICK_DATA_API = `click${EVENT_KEY}${DATA_API_KEY}`;
 
 const CLASS_NAME_CLOSE = 's-menu-close';
+const CLASS_NAME_HORIZONTAL = 's-menu-horizontal';
 const CLASS_NAME_SUBMENU_OPEN = 's-submenu-open';
 const CLASS_NAME_SUBMENU_POPUP = 's-submenu-popup';
 
 const SELECTOR_MENU = '.s-menu';
 const SELECTOR_SUBMENU_TOGGLE = '.s-submenu-toggle';
+
+const PLACEMENT_BOTTOM = 'bottom-start';
+const PLACEMENT_RIGHT = 'left-start';
 
 class Menu extends BaseComponent {
     constructor(element, config) {
@@ -26,16 +30,18 @@ class Menu extends BaseComponent {
         return NAME
     }
 
+    isPopup() {
+        return this._element.classList.contains(CLASS_NAME_CLOSE) || this._element.classList.contains(CLASS_NAME_HORIZONTAL);
+    }
+
     toggleSubMenu(element) {
-        console.log(element)
         const liElement = SelectorEngine.parents(element, 'li')[0];
-        const isClosed = this._element.classList.contains(CLASS_NAME_CLOSE);
 
         const parentUl = liElement.parentElement;
         if (parentUl) {
             const openItems = SelectorEngine.find(`.${CLASS_NAME_SUBMENU_OPEN}`, parentUl);
             for (const item of openItems) {
-                if (item !== liElement && (isClosed || item.classList.contains(CLASS_NAME_SUBMENU_POPUP))) {
+                if (item !== liElement && (this.isPopup() || item.classList.contains(CLASS_NAME_SUBMENU_POPUP))) {
                     item.classList.remove(CLASS_NAME_SUBMENU_OPEN);
                 }
             }
@@ -45,11 +51,9 @@ class Menu extends BaseComponent {
     }
 
     closeAllDropdowns() {
-        const isClosed = this._element.classList.contains(CLASS_NAME_CLOSE);
-
         const openItems = SelectorEngine.find(`.${CLASS_NAME_SUBMENU_OPEN}`, this._element);
         for (const item of openItems) {
-            if (isClosed || item.classList.contains(CLASS_NAME_SUBMENU_POPUP)) {
+            if (this.isPopup() || item.classList.contains(CLASS_NAME_SUBMENU_POPUP)) {
                 item.classList.remove(CLASS_NAME_SUBMENU_OPEN);
             }
         }
@@ -61,19 +65,19 @@ class Menu extends BaseComponent {
     }
 }
 
-EventHandler.on(document, EVENT_CLICK_DATA_API, SELECTOR_SUBMENU_TOGGLE, function (event) {
-    event.preventDefault();
+/*EventHandler.on(document, EVENT_CLICK_DATA_API, SELECTOR_SUBMENU_TOGGLE, function (event) {
     Menu.create(this).toggleSubMenu(this);
 });
 
 EventHandler.on(document, EVENT_CLICK_DATA_API, (event) => {
-    const menu = SelectorEngine.findOne(SELECTOR_MENU);
-    if (!menu) return;
+    const menus = SelectorEngine.find(SELECTOR_MENU);
 
-    const menuInstance = Menu.getInstance(menu);
-    if (!menuInstance) return;
+    for (const item of menus) {
+        const menuInstance = Menu.getInstance(item);
+        if (!menuInstance) continue;
 
-    if (!menu.contains(event.target)) {
-        menuInstance.closeAllDropdowns();
+        if (!item.contains(event.target)) {
+            menuInstance.closeAllDropdowns();
+        }
     }
-});
+});*/
