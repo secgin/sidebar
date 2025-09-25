@@ -1,4 +1,4 @@
 import './styles.scss';
-import './popup';
-import './menu';
-import './app-menu';
+import './js/popup';
+import './js/menu';
+import './js/app-menu';

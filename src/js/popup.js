@@ -19,6 +19,7 @@ const EVENT_HIDDEN = `hidden${EVENT_KEY}`
 const CLASS_NAME_SHOW = 's-show'
 const CLASS_NAME_HORIZONTAL_MENU = 's-menu-horizontal'
 const CLASS_NAME_MENU_CLOSE = 's-menu-close'
+const CLASS_NAME_ALWAYS_POPUP = 's-always-popup'
 
 const SELECTOR_DATA_TOGGLE = '[data-bs-toggle="s-popup"]:not(.disabled):not(:disabled)'
 const SELECTOR_DATA_TOGGLE_SHOWN = `${SELECTOR_DATA_TOGGLE}.${CLASS_NAME_SHOW}`
@@ -73,6 +74,9 @@ class Popup extends BaseComponent {
     }
 
     isPopup() {
+        if (this._element.classList.contains(CLASS_NAME_ALWAYS_POPUP) === true)
+            return true;
+
         if (this._inMenu === false)
             return false;
 
@@ -183,7 +187,6 @@ class Popup extends BaseComponent {
         }
 
         // Disable Popper if we have a static display or Dropdown is in Navbar
-        console.log(this.isPopup());
         if (this.isPopup()===false) {
             Manipulator.setDataAttribute(this._popup, 'popper', 'static') // TODO: v6 remove
             defaultPopperConfig.modifiers = [{

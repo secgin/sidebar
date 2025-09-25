@@ -1,0 +1,178 @@
+.s-app-menu {
+  --s-app-menu-bg: #ffffff;
+  --s-app-menu-text-color: #374151;
+  --s-app-menu-border-color: #e5e7eb;
+  --s-app-menu-hover-bg: #0d6efd;
+  --s-app-menu-active-text-color: #3b82f6;
+  --s-app-menu-hover-text-color: #fff;
+  --s-app-menu-shadow: 0 2px 5px #ccc;
+
+  --s-app-menu-space: 5px;
+  --s-app-menu-border-radius: .375rem;
+  --s-app-menu-nav-item-space: 5px;
+  --s-app-menu-nav-icon-space: 5px;
+  --s-app-menu-nav-icon-size: 24px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 250px;
+  height: 100vh;
+
+  padding: var(--s-app-menu-space);
+  background-color: var(--s-app-menu-bg);
+
+  box-sizing: border-box;
+
+  * {
+    box-sizing: border-box;
+  }
+
+  &.s-close {
+    &:not(.s-horizontal) {
+      max-width: calc(
+              var(--s-app-menu-space) +
+              var(--s-app-menu-space) +
+              var(--s-app-menu-nav-icon-size) +
+              var(--s-app-menu-nav-icon-space) +
+              var(--s-app-menu-nav-icon-space) +
+              var(--s-app-menu-nav-item-space) +
+              var(--s-app-menu-nav-item-space));
+    }
+  }
+
+  .s-menu {
+    width: 100%;
+    flex-grow: 1;
+
+    --s-menu-border-radius: var(--s-app-menu-border-radius);
+    --s-menu-icon-size: var(--s-app-menu-nav-icon-size);
+    --s-menu-icon-space: var(--s-app-menu-nav-icon-space);
+    --s-menu-item-space: var(--s-app-menu-nav-item-space);
+    --s-menu-padding: 0;
+  }
+
+  .s-brand {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    gap: var(--s-app-menu-nav-item-space);
+    padding: var(--s-app-menu-nav-item-space);
+
+    .s-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: calc(var(--s-app-menu-nav-icon-size) + var(--s-app-menu-nav-icon-space) + var(--s-app-menu-nav-icon-space));
+      min-height: calc(var(--s-app-menu-nav-icon-size) + var(--s-app-menu-nav-icon-space) + var(--s-app-menu-nav-icon-space));
+      max-width: calc(var(--s-app-menu-nav-icon-size) + var(--s-app-menu-nav-icon-space) + var(--s-app-menu-nav-icon-space));
+      max-height: calc(var(--s-app-menu-nav-icon-size) + var(--s-app-menu-nav-icon-space) + var(--s-app-menu-nav-icon-space));
+
+      &.s-icon-text {
+        background-color: var(--s-app-menu-hover-bg);
+        border-radius: var(--s-app-menu-border-radius);
+        color: var(--s-app-menu-hover-text-color);
+      }
+
+      > img {
+        width: 100%;
+      }
+    }
+
+    .s-title {
+      flex-grow: 1;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+
+      small {
+        display: block;
+        font-size: 10px;
+        line-height: 10px;
+      }
+    }
+  }
+
+  .s-user {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    cursor: pointer;
+    gap: var(--s-app-menu-nav-item-space);
+    padding: var(--s-app-menu-nav-item-space);
+    border-radius: var(--s-app-menu-border-radius);
+
+    &:hover,
+    &.show {
+      background-color: var(--s-app-menu-hover-bg);
+      color: var(--s-app-menu-hover-text-color);
+    }
+
+    .s-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: calc(var(--s-app-menu-nav-icon-size) + var(--s-app-menu-nav-icon-space) + var(--s-app-menu-nav-icon-space));
+      min-height: calc(var(--s-app-menu-nav-icon-size) + var(--s-app-menu-nav-icon-space) + var(--s-app-menu-nav-icon-space));
+      max-width: calc(var(--s-app-menu-nav-icon-size) + var(--s-app-menu-nav-icon-space) + var(--s-app-menu-nav-icon-space));
+      max-height: calc(var(--s-app-menu-nav-icon-size) + var(--s-app-menu-nav-icon-space) + var(--s-app-menu-nav-icon-space));
+
+      > svg {
+        width: var(--s-app-menu-nav-icon-size);
+        height: var(--s-app-menu-nav-icon-size);
+      }
+    }
+
+    .s-username {
+      flex-grow: 1;
+    }
+  }
+
+  &.s-close {
+    .s-brand > .s-title,
+    .s-user > .s-username,
+      //.s-app-menu-toggle
+    {
+      display: none;
+    }
+  }
+
+  &:not(.s-horizontal) {
+    border-right: 1px solid var(--s-app-menu-border-color);
+
+    .s-brand {
+      margin-bottom: 10px;
+    }
+
+    .s-user {
+      width: 100%;
+    }
+  }
+
+  &.s-horizontal {
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 10px;
+    //box-shadow: var(--s-app-menu-shadow);
+    border-bottom: 1px solid var(--s-app-menu-border-color);
+
+    .s-brand {
+      margin-right: 20px;
+    }
+
+    .s-user {
+      .s-icon {
+        order: 1;
+      }
+
+      .s-username {
+        order: 0;
+      }
+    }
+  }
+}
